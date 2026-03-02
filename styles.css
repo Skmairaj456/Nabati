@@ -1,26 +1,73 @@
 /* ============================================
-   NABATI ORIGINALS — Editorial E‑commerce
-   Handcrafted. Asymmetric. No template.
+   NABATI ORIGINALS — Design System
+   Strict. Consistent. No deviations.
+   See DESIGN-SYSTEM.md for full reference.
    ============================================ */
 
 :root {
-  /* Single luxury bottle asset (sourced). One image, varied crops/contexts. Layout does not depend on it. */
-  --bottle: url("https://images.unsplash.com/photo-1594035910387-fea47794261f?w=1200&q=80");
-  --sand: #2a241a;
-  --sand-mid: #3d3528;
-  --camel: #6b5d4d;
-  --smoke: #1a1816;
-  --black: #0f0e0c;
-  --gold: #9a8b6e;
-  --gold-muted: #7a6e5a;
-  --paper: #e6e2db;
-  --paper-muted: #9c9589;
+  /* ---- COLOR (strict: no bright, no pure white, soft contrast) ---- */
+  /* Primary: deep sand brown / desert umber */
+  --color-sand: #2a241a;
+  --color-sand-mid: #3d3528;
+  /* Primary: smoked black */
+  --color-smoke: #1a1816;
+  --color-black: #0f0e0c;
+  /* Secondary: warm camel, muted amber */
+  --color-camel: #6b5d4d;
+  --color-amber: #7a6e5a;
+  /* Accent: soft brushed gold (use sparingly) */
+  --color-gold: #9a8b6e;
+  /* Accent: off-white / ivory for contrast only */
+  --color-ivory: #e6e2db;
+  --color-ivory-muted: #9c9589;
+
+  /* Aliases (use these in components) */
+  --sand: var(--color-sand);
+  --sand-mid: var(--color-sand-mid);
+  --smoke: var(--color-smoke);
+  --black: var(--color-black);
+  --camel: var(--color-camel);
+  --gold: var(--color-gold);
+  --gold-muted: var(--color-amber);
+  --paper: var(--color-ivory);
+  --paper-muted: var(--color-ivory-muted);
+
+  /* Borders & overlays (soft, never sharp) */
+  --border-subtle: 1px solid rgba(154, 139, 110, 0.08);
+  --border-soft: 1px solid rgba(154, 139, 110, 0.12);
+  --border-medium: 1px solid rgba(154, 139, 110, 0.25);
+  --overlay-soft: rgba(58, 50, 38, 0.4);
+  --overlay-hero: rgba(45, 40, 32, 0.5);
   --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.2);
   --shadow-candle: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.3);
+
+  /* ---- TYPOGRAPHY (H1 > H2 > H3 > body, editorial leads) ---- */
   --font-editorial: "Cormorant Garamond", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
+  --type-h1: clamp(2.25rem, 5vw, 4rem);
+  --type-h2: clamp(1.75rem, 3.5vw, 2.75rem);
+  --type-h3: clamp(1.25rem, 2vw, 1.5rem);
+  --type-body: 15px;
+  --type-small: 13px;
+  --type-tiny: 11px;
+  --type-label: 10px;
+  --leading-tight: 1.05;
+  --leading-body: 1.6;
+  --leading-relaxed: 1.75;
+  --tracking-tight: 0.02em;
+  --tracking-mid: 0.08em;
+  --tracking-wide: 0.2em;
+  --tracking-label: 0.35em;
+
+  /* ---- MOTION (subtle, slow, purposeful) ---- */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-slow: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --duration-fast: 0.35s;
+  --duration-mid: 0.5s;
+  --duration-slow: 0.9s;
+
+  /* ---- SPACING (generous but controlled, editorial rhythm) ---- */
   --rhy: 8px;
   --space-1: calc(var(--rhy) * 2);
   --space-2: calc(var(--rhy) * 4);
@@ -32,6 +79,9 @@
   --space-8: calc(var(--rhy) * 24);
   --max-w: 1440px;
   --max-w-narrow: 720px;
+
+  /* Imagery: single bottle asset, varied crops */
+  --bottle: url("https://images.unsplash.com/photo-1594035910387-fea47794261f?w=1200&q=80");
 }
 
 *,
@@ -49,8 +99,8 @@ html {
 body {
   font-family: var(--font-body);
   font-weight: 400;
-  font-size: 15px;
-  line-height: 1.6;
+  font-size: var(--type-body);
+  line-height: var(--leading-body);
   color: var(--paper-muted);
   background: var(--black);
   overflow-x: hidden;
@@ -133,12 +183,12 @@ a {
 }
 
 .masthead-nav a {
-  font-size: 11px;
-  letter-spacing: 0.2em;
+  font-size: var(--type-tiny);
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--paper);
   opacity: 0.75;
-  transition: opacity 0.35s var(--ease);
+  transition: opacity var(--duration-fast) var(--ease);
 }
 
 .masthead-nav a:hover {
@@ -243,7 +293,7 @@ a {
   position: absolute;
   inset: 0;
   background: var(--black);
-  background-image: radial-gradient(ellipse 70% 50% at 50% 80%, rgba(58, 50, 38, 0.4) 0%, transparent 55%);
+  background-image: radial-gradient(ellipse 70% 50% at 50% 80%, var(--overlay-soft) 0%, transparent 55%);
 }
 
 .hero-with-image .open-bg-image {
@@ -357,14 +407,14 @@ a {
 /* ---- Section pattern: label → title → content ---- */
 .section-label {
   display: block;
-  font-size: 10px;
-  letter-spacing: 0.35em;
+  font-size: var(--type-label);
+  letter-spacing: var(--tracking-label);
   text-transform: uppercase;
   color: var(--gold-muted);
   margin-bottom: var(--space-2);
   opacity: 0;
   transform: translateY(12px);
-  transition: opacity 0.7s var(--ease-slow), transform 0.7s var(--ease-slow);
+  transition: opacity var(--duration-slow) var(--ease-slow), transform var(--duration-slow) var(--ease-slow);
 }
 
 .section-label.revealed {
@@ -586,7 +636,7 @@ a {
 
 .featured-card-link:hover .featured-card-img {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-hover);
 }
 
 .featured-card-img--1 { background-position: 25% 45%; }
@@ -862,6 +912,70 @@ a {
   opacity: 1;
 }
 
+/* ---- Bespoke (exclusive, consultative, premium) ---- */
+.block-bespoke {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-top: var(--border-subtle);
+}
+
+.block-bespoke-hero {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+}
+
+.bespoke-title {
+  font-family: var(--font-editorial);
+  font-size: var(--type-h1);
+  font-weight: 500;
+  color: var(--paper);
+  letter-spacing: var(--tracking-tight);
+  margin-bottom: var(--space-2);
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.8s var(--ease-slow), transform 0.8s var(--ease-slow);
+}
+
+.bespoke-title.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bespoke-subtitle {
+  font-family: var(--font-editorial);
+  font-size: var(--type-h2);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--gold-muted);
+  letter-spacing: var(--tracking-mid);
+  margin-bottom: var(--space-4);
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s var(--ease-slow) 0.1s, transform 0.8s var(--ease-slow) 0.1s;
+}
+
+.bespoke-subtitle.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.bespoke-intro {
+  margin-bottom: var(--space-4);
+}
+
+.block-bespoke-content {
+  padding-top: 0;
+  padding-bottom: var(--space-6);
+}
+
+.block-bespoke-content .editorial-body {
+  margin-bottom: var(--space-4);
+}
+
+.block-bespoke-content .editorial-body:last-child {
+  margin-bottom: 0;
+}
+
 /* ---- Footer ---- */
 .foot {
   padding: var(--space-4) var(--space-4);
@@ -1061,7 +1175,7 @@ a {
 
 .collection-card-link:hover .collection-card-img {
   transform: translateY(-4px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: var(--shadow-hover);
 }
 
 .collection-card-name {
@@ -1197,7 +1311,7 @@ a {
   position: absolute;
   inset: 0;
   background: var(--black);
-  background-image: radial-gradient(ellipse 60% 40% at 50% 70%, rgba(45, 40, 32, 0.5) 0%, transparent 60%);
+  background-image: radial-gradient(ellipse 60% 40% at 50% 70%, var(--overlay-hero) 0%, transparent 60%);
 }
 
 .product-gallery {
@@ -1428,7 +1542,7 @@ a {
   z-index: 50;
   padding: var(--space-3) var(--space-4);
   background: rgba(15, 14, 12, 0.96);
-  border-top: 1px solid rgba(154, 139, 110, 0.12);
+  border-top: var(--border-soft);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1436,7 +1550,7 @@ a {
   opacity: 0;
   visibility: hidden;
   transform: translateY(100%);
-  transition: opacity 0.5s var(--ease-slow), transform 0.5s var(--ease-slow), visibility 0.5s;
+  transition: opacity var(--duration-mid) var(--ease-slow), transform var(--duration-mid) var(--ease-slow), visibility var(--duration-mid);
 }
 
 .product-cta-bar.visible {
