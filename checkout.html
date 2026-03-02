@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — NABATI ORIGINALS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-checkout">
+  <div class="texture" aria-hidden="true"></div>
+
+  <header class="checkout-header">
+    <a href="index.html" class="checkout-logo">NABATI ORIGINALS</a>
+    <h1 class="checkout-title">Complete your order</h1>
+    <p class="checkout-summary-text" id="checkout-summary">1 fragrance · 50 ml</p>
+  </header>
+
+  <div class="checkout-form-wrap">
+    <form class="checkout-form" action="#" method="post" id="checkout-form">
+      <fieldset class="checkout-section">
+        <legend class="checkout-section-legend">Your details</legend>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required autocomplete="name" />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required autocomplete="email" />
+      </fieldset>
+
+      <fieldset class="checkout-section">
+        <legend class="checkout-section-legend">Delivery</legend>
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" required autocomplete="street-address" />
+
+        <div class="row">
+          <div>
+            <label for="city">City</label>
+            <input type="text" id="city" name="city" required autocomplete="address-level2" />
+          </div>
+          <div>
+            <label for="postal">Postal code</label>
+            <input type="text" id="postal" name="postal" required autocomplete="postal-code" />
+          </div>
+        </div>
+
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country" required autocomplete="country-name" />
+      </fieldset>
+
+      <fieldset class="checkout-section">
+        <legend class="checkout-section-legend">Payment</legend>
+        <label for="card">Card number</label>
+        <input type="text" id="card" name="card" required inputmode="numeric" autocomplete="cc-number" />
+
+        <div class="row">
+          <div>
+            <label for="expiry">Expiry</label>
+            <input type="text" id="expiry" name="expiry" required placeholder="MM / YY" autocomplete="cc-exp" />
+          </div>
+          <div>
+            <label for="cvc">CVC</label>
+            <input type="text" id="cvc" name="cvc" required inputmode="numeric" autocomplete="cc-csc" />
+          </div>
+        </div>
+      </fieldset>
+
+      <button type="submit" class="checkout-submit">Complete order</button>
+    </form>
+  </div>
+
+  <script>
+    (function() {
+      var names = { 'dunes-of-gold': 'Dunes of Gold', 'sacred-smoke': 'Sacred Smoke', 'midnight-oasis': 'Midnight Oasis' };
+      var m = /id=([^&]+)/.exec(window.location.search || '');
+      var id = m && names[m[1]] ? m[1] : null;
+      var el = document.getElementById('checkout-summary');
+      if (el && id) el.textContent = names[id] + ' · 50 ml';
+    })();
+    document.getElementById('checkout-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = this.querySelector('.checkout-submit');
+      btn.textContent = 'Thank you';
+      btn.disabled = true;
+    });
+  </script>
+</body>
+</html>

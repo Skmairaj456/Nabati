@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dunes of Gold — NABATI ORIGINALS</title>
+  <meta name="description" content="Dunes of Gold. Opulent, warm. Oud, saffron, rose, amber, musk." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-product">
+  <div class="texture" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <a href="index.html" class="masthead-logo" aria-label="NABATI ORIGINALS">
+      <img src="../perfume.pdf" alt="" class="masthead-logo-img" onerror="this.style.display='none'; this.nextElementSibling.classList.add('on');" />
+      <span class="masthead-logo-text">
+        <span class="masthead-word">NABATI</span>
+        <span class="masthead-word masthead-word-sub">ORIGINALS</span>
+      </span>
+    </a>
+    <nav class="masthead-nav" aria-label="Primary">
+      <a href="collection.html">Collection</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="product-hero" aria-label="Fragrance">
+      <div class="product-hero-bg"></div>
+      <div class="product-hero-reference" aria-hidden="true"></div>
+      <a href="collection.html" class="product-back">Collection</a>
+      <div class="product-hero-copy">
+        <h1 class="product-hero-name" id="product-name">Dunes of Gold</h1>
+        <p class="product-hero-mood" id="product-mood">Opulent. Warm.</p>
+        <p class="product-hero-meta" id="product-meta">50 ml · Eau de Parfum</p>
+      </div>
+    </section>
+
+    <section class="product-story">
+      <h2 class="product-section-heading">The story</h2>
+      <div class="product-story-body" id="product-story">
+        <p>When the sun meets the dunes, the air carries something ancient. This fragrance was built to capture that moment—the first breath of evening, the weight of saffron and oud, the softness of rose that has travelled across deserts.</p>
+        <p>Every ingredient was chosen for its ability to hold memory. Amber for warmth. Musk for skin. Nothing is accidental.</p>
+      </div>
+    </section>
+
+    <section class="product-notes">
+      <div class="product-notes-inner">
+        <h2 class="product-section-heading">Fragrance notes</h2>
+        <ul class="product-notes-list" id="product-notes">
+          <li>Oud</li>
+          <li>Saffron</li>
+          <li>Rose</li>
+          <li>Amber</li>
+          <li>Musk</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="product-purchase" aria-label="Purchase">
+      <div class="product-purchase-inner">
+        <p class="product-purchase-meta"><span id="product-price-main">$340</span> — 50 ml · Eau de Parfum</p>
+        <a href="checkout.html?id=dunes-of-gold" class="product-cta-btn product-cta-btn--block" id="product-add-to-bag">Add to bag</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Sticky CTA: revealed on scroll, same tone -->
+  <div class="product-cta-bar" id="product-cta-bar" aria-label="Purchase">
+    <span class="product-cta-price"><span id="product-price">$340</span> — 50 ml</span>
+    <a href="checkout.html?id=dunes-of-gold" class="product-cta-btn" id="product-cta-btn">Add to bag</a>
+  </div>
+
+  <script>
+    (function() {
+      var data = {
+        'dunes-of-gold': {
+          name: 'Dunes of Gold',
+          mood: 'Opulent. Warm.',
+          price: '$340',
+          story: '<p>When the sun meets the dunes, the air carries something ancient. This fragrance was built to capture that moment—the first breath of evening, the weight of saffron and oud, the softness of rose that has travelled across deserts.</p><p>Every ingredient was chosen for its ability to hold memory. Amber for warmth. Musk for skin. Nothing is accidental.</p>',
+          notes: ['Oud', 'Saffron', 'Rose', 'Amber', 'Musk']
+        },
+        'sacred-smoke': {
+          name: 'Sacred Smoke',
+          mood: 'Resinous. Timeless.',
+          price: '$360',
+          story: '<p>Frankincense and myrrh have been carried across deserts for millennia. This fragrance is an ode to that journey—smoke, cedar, leather, and the silence of ritual.</p><p>Wear it when you need the world to slow down.</p>',
+          notes: ['Frankincense', 'Myrrh', 'Cedar', 'Incense', 'Leather']
+        },
+        'midnight-oasis': {
+          name: 'Midnight Oasis',
+          mood: 'Floral. Deep.',
+          price: '$340',
+          story: '<p>Under desert night, jasmine opens. This blend holds that moment—floral, but anchored by oud and sandalwood. Saffron and vanilla add warmth without sweetness.</p><p>For those who prefer depth to brightness.</p>',
+          notes: ['Jasmine', 'Oud', 'Sandalwood', 'Saffron', 'Vanilla']
+        }
+      };
+      var id = (function() {
+        var m = /id=([^&]+)/.exec(window.location.search || '');
+        return (m && data[m[1]]) ? m[1] : 'dunes-of-gold';
+      })();
+      var p = data[id];
+      if (p) {
+        document.title = p.name + ' — NABATI ORIGINALS';
+        var el;
+        if ((el = document.getElementById('product-name'))) el.textContent = p.name;
+        if ((el = document.getElementById('product-mood'))) el.textContent = p.mood;
+        if ((el = document.getElementById('product-meta'))) el.textContent = '50 ml · Eau de Parfum';
+        if ((el = document.getElementById('product-price'))) el.textContent = p.price;
+        if ((el = document.getElementById('product-price-main'))) el.textContent = p.price;
+        if ((el = document.getElementById('product-story'))) el.innerHTML = p.story;
+        if ((el = document.getElementById('product-notes'))) {
+          el.innerHTML = p.notes.map(function(n) { return '<li>' + n + '</li>'; }).join('');
+        }
+        var bagLink = document.getElementById('product-add-to-bag');
+        var barLink = document.getElementById('product-cta-btn');
+        var checkoutUrl = 'checkout.html?id=' + id;
+        if (bagLink) bagLink.href = checkoutUrl;
+        if (barLink) barLink.href = checkoutUrl;
+      }
+    })();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
