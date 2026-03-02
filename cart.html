@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your bag — NABATI ORIGINALS</title>
+  <meta name="description" content="Review your selection. NABATI ORIGINALS." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-cart">
+  <div class="texture" aria-hidden="true"></div>
+
+  <header class="masthead">
+    <a href="index.html" class="masthead-logo" aria-label="NABATI ORIGINALS">
+      <span class="masthead-logo-text on">
+        <span class="masthead-word">NABATI</span>
+        <span class="masthead-word masthead-word-sub">ORIGINALS</span>
+      </span>
+    </a>
+    <nav class="masthead-nav" aria-label="Primary">
+      <a href="collection.html">Collection</a>
+      <a href="cart.html" class="masthead-nav-current">Bag</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="cart-main">
+    <div class="cart-inner">
+      <h1 class="cart-title">Your bag</h1>
+
+      <div class="cart-content" id="cart-content">
+        <!-- Filled by JS when ?id= present -->
+        <div class="cart-empty" id="cart-empty">
+          <p class="cart-empty-text">Your bag is empty.</p>
+          <a href="collection.html" class="cart-empty-cta">View the collection</a>
+        </div>
+        <div class="cart-items" id="cart-items" hidden>
+          <div class="cart-item" id="cart-item">
+            <div class="cart-item-visual">
+              <div class="cart-item-img" id="cart-item-img"></div>
+            </div>
+            <div class="cart-item-details">
+              <h2 class="cart-item-name" id="cart-item-name"></h2>
+              <p class="cart-item-meta" id="cart-item-meta"></p>
+              <p class="cart-item-price" id="cart-item-price"></p>
+            </div>
+          </div>
+          <div class="cart-summary">
+            <p class="cart-total"><span class="cart-total-label">Total</span> <span class="cart-total-amount" id="cart-total"></span></p>
+            <a href="#" class="cart-checkout-btn" id="cart-checkout-btn">Proceed to checkout</a>
+            <a href="collection.html" class="cart-continue">Continue shopping</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="foot">
+    <div class="foot-inner">
+      <span class="foot-logo">NABATI ORIGINALS</span>
+      <nav class="foot-nav" aria-label="Footer">
+        <a href="collection.html">Collection</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+      <span class="foot-copy">&copy; NABATI ORIGINALS</span>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      var data = {
+        'dunes-of-gold': { name: 'Dunes of Gold', price: '$340', imgClass: 'collection-item-img--1' },
+        'sacred-smoke': { name: 'Sacred Smoke', price: '$360', imgClass: 'collection-item-img--2' },
+        'midnight-oasis': { name: 'Midnight Oasis', price: '$340', imgClass: 'collection-item-img--3' }
+      };
+      var m = /id=([^&]+)/.exec(window.location.search || '');
+      var id = m && data[m[1]] ? m[1] : null;
+      var emptyEl = document.getElementById('cart-empty');
+      var itemsEl = document.getElementById('cart-items');
+      var checkoutBtn = document.getElementById('cart-checkout-btn');
+
+      if (id && data[id]) {
+        var p = data[id];
+        emptyEl.hidden = true;
+        itemsEl.hidden = false;
+        document.getElementById('cart-item-name').textContent = p.name;
+        document.getElementById('cart-item-meta').textContent = '50 ml · Eau de Parfum';
+        document.getElementById('cart-item-price').textContent = p.price;
+        document.getElementById('cart-total').textContent = p.price;
+        document.getElementById('cart-item-img').className = 'cart-item-img ' + p.imgClass;
+        if (checkoutBtn) checkoutBtn.href = 'checkout.html?id=' + id;
+      }
+    })();
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>

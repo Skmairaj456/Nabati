@@ -24,6 +24,10 @@
       if (openTitle) openTitle.classList.add('revealed');
     }, delay + (reducedMotion ? 200 : 900));
     window.setTimeout(function () {
+      var openTagline = document.querySelector('.open-tagline');
+      if (openTagline) openTagline.classList.add('revealed');
+    }, delay + (reducedMotion ? 300 : 1100));
+    window.setTimeout(function () {
       if (openCta) openCta.classList.add('revealed');
     }, delay + (reducedMotion ? 400 : 1400));
   }
@@ -79,7 +83,7 @@
       btn.addEventListener('click', function () {
         var m = /id=([^&]+)/.exec(window.location.search || '');
         var q = m ? '?id=' + m[1] : '';
-        window.location.href = 'checkout.html' + q;
+        window.location.href = 'cart.html' + q;
       });
     }
   }

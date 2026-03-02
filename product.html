@@ -15,14 +15,14 @@
 
   <header class="masthead">
     <a href="index.html" class="masthead-logo" aria-label="NABATI ORIGINALS">
-      <img src="../perfume.pdf" alt="" class="masthead-logo-img" onerror="this.style.display='none'; this.nextElementSibling.classList.add('on');" />
-      <span class="masthead-logo-text">
+      <span class="masthead-logo-text on">
         <span class="masthead-word">NABATI</span>
         <span class="masthead-word masthead-word-sub">ORIGINALS</span>
       </span>
     </a>
     <nav class="masthead-nav" aria-label="Primary">
       <a href="collection.html">Collection</a>
+      <a href="cart.html">Bag</a>
       <a href="index.html#contact">Contact</a>
     </nav>
   </header>
@@ -36,6 +36,7 @@
         <h1 class="product-hero-name" id="product-name">Dunes of Gold</h1>
         <p class="product-hero-mood" id="product-mood">Opulent. Warm.</p>
         <p class="product-hero-meta" id="product-meta">50 ml · Eau de Parfum</p>
+        <p class="product-hero-price" id="product-hero-price">$340</p>
       </div>
     </section>
 
@@ -63,7 +64,7 @@
     <section class="product-purchase" aria-label="Purchase">
       <div class="product-purchase-inner">
         <p class="product-purchase-meta"><span id="product-price-main">$340</span> — 50 ml · Eau de Parfum</p>
-        <a href="checkout.html?id=dunes-of-gold" class="product-cta-btn product-cta-btn--block" id="product-add-to-bag">Add to bag</a>
+        <a href="cart.html?id=dunes-of-gold" class="product-cta-btn product-cta-btn--block" id="product-add-to-bag">Add to bag</a>
       </div>
     </section>
   </main>
@@ -71,7 +72,7 @@
   <!-- Sticky CTA: revealed on scroll, same tone -->
   <div class="product-cta-bar" id="product-cta-bar" aria-label="Purchase">
     <span class="product-cta-price"><span id="product-price">$340</span> — 50 ml</span>
-    <a href="checkout.html?id=dunes-of-gold" class="product-cta-btn" id="product-cta-btn">Add to bag</a>
+    <a href="cart.html?id=dunes-of-gold" class="product-cta-btn" id="product-cta-btn">Add to bag</a>
   </div>
 
   <script>
@@ -110,6 +111,8 @@
         if ((el = document.getElementById('product-name'))) el.textContent = p.name;
         if ((el = document.getElementById('product-mood'))) el.textContent = p.mood;
         if ((el = document.getElementById('product-meta'))) el.textContent = '50 ml · Eau de Parfum';
+        if ((el = document.getElementById('product-hero-price'))) el.textContent = p.price;
+        if ((el = document.getElementById('product-hero-price'))) el.textContent = p.price;
         if ((el = document.getElementById('product-price'))) el.textContent = p.price;
         if ((el = document.getElementById('product-price-main'))) el.textContent = p.price;
         if ((el = document.getElementById('product-story'))) el.innerHTML = p.story;
@@ -118,9 +121,9 @@
         }
         var bagLink = document.getElementById('product-add-to-bag');
         var barLink = document.getElementById('product-cta-btn');
-        var checkoutUrl = 'checkout.html?id=' + id;
-        if (bagLink) bagLink.href = checkoutUrl;
-        if (barLink) barLink.href = checkoutUrl;
+        var cartUrl = 'cart.html?id=' + id;
+        if (bagLink) bagLink.href = cartUrl;
+        if (barLink) barLink.href = cartUrl;
       }
     })();
   </script>

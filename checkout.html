@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Checkout — NABATI ORIGINALS</title>
+  <meta name="description" content="Complete your order. Secure checkout." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
@@ -15,8 +16,19 @@
   <header class="checkout-header">
     <a href="index.html" class="checkout-logo">NABATI ORIGINALS</a>
     <h1 class="checkout-title">Complete your order</h1>
-    <p class="checkout-summary-text" id="checkout-summary">1 fragrance · 50 ml</p>
+    <a href="collection.html" class="checkout-back">Back to collection</a>
   </header>
+
+  <section class="checkout-order-summary" aria-label="Order summary">
+    <div class="checkout-order-inner">
+      <h2 class="checkout-summary-heading">Order summary</h2>
+      <div class="checkout-summary-line" id="checkout-summary-line">
+        <span class="checkout-summary-name" id="checkout-summary-name">1 fragrance</span>
+        <span class="checkout-summary-meta" id="checkout-summary-meta">50 ml</span>
+      </div>
+      <p class="checkout-summary-total"><span class="checkout-summary-total-label">Total</span> <span class="checkout-summary-total-amount" id="checkout-summary-total">$340</span></p>
+    </div>
+  </section>
 
   <div class="checkout-form-wrap">
     <form class="checkout-form" action="#" method="post" id="checkout-form">
@@ -72,11 +84,22 @@
 
   <script>
     (function() {
-      var names = { 'dunes-of-gold': 'Dunes of Gold', 'sacred-smoke': 'Sacred Smoke', 'midnight-oasis': 'Midnight Oasis' };
+      var data = {
+        'dunes-of-gold': { name: 'Dunes of Gold', price: '$340' },
+        'sacred-smoke': { name: 'Sacred Smoke', price: '$360' },
+        'midnight-oasis': { name: 'Midnight Oasis', price: '$340' }
+      };
       var m = /id=([^&]+)/.exec(window.location.search || '');
-      var id = m && names[m[1]] ? m[1] : null;
-      var el = document.getElementById('checkout-summary');
-      if (el && id) el.textContent = names[id] + ' · 50 ml';
+      var id = m && data[m[1]] ? m[1] : null;
+      if (id && data[id]) {
+        var p = data[id];
+        var nameEl = document.getElementById('checkout-summary-name');
+        var metaEl = document.getElementById('checkout-summary-meta');
+        var totalEl = document.getElementById('checkout-summary-total');
+        if (nameEl) nameEl.textContent = p.name;
+        if (metaEl) metaEl.textContent = '50 ml';
+        if (totalEl) totalEl.textContent = p.price;
+      }
     })();
     document.getElementById('checkout-form').addEventListener('submit', function(e) {
       e.preventDefault();
