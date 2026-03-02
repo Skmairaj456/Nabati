@@ -21,22 +21,35 @@
       </span>
     </a>
     <nav class="masthead-nav" aria-label="Primary">
-      <a href="collection.html">Collection</a>
-      <a href="cart.html">Bag</a>
+      <a href="collection.html">Shop All</a>
+      <a href="collection.html#featured">Best Sellers</a>
       <a href="index.html#contact">Contact</a>
+      <a href="cart.html" class="masthead-cart" aria-label="Cart">
+        <span class="masthead-cart-icon" aria-hidden="true"></span>
+        <span class="masthead-cart-count" id="masthead-cart-count">0</span>
+      </a>
     </nav>
   </header>
 
   <main>
     <section class="product-hero" aria-label="Fragrance">
       <div class="product-hero-bg"></div>
-      <div class="product-hero-reference" aria-hidden="true"></div>
-      <a href="collection.html" class="product-back">Collection</a>
-      <div class="product-hero-copy">
-        <h1 class="product-hero-name" id="product-name">Dunes of Gold</h1>
-        <p class="product-hero-mood" id="product-mood">Opulent. Warm.</p>
-        <p class="product-hero-meta" id="product-meta">50 ml · Eau de Parfum</p>
-        <p class="product-hero-price" id="product-hero-price">$340</p>
+      <a href="collection.html" class="product-back">Shop All</a>
+      <div class="product-hero-inner">
+        <div class="product-gallery">
+          <div class="product-gallery-main product-gallery-main--bottle" id="product-gallery-main" role="img" aria-label="Product"></div>
+          <div class="product-gallery-thumbs">
+            <button type="button" class="product-gallery-thumb is-active" aria-label="Main view" data-view="main"></button>
+            <button type="button" class="product-gallery-thumb" aria-label="Detail view" data-view="detail"></button>
+            <button type="button" class="product-gallery-thumb" aria-label="Close-up" data-view="close"></button>
+          </div>
+        </div>
+        <div class="product-hero-copy">
+          <h1 class="product-hero-name" id="product-name">Dunes of Gold</h1>
+          <p class="product-hero-mood" id="product-mood">Opulent. Warm.</p>
+          <p class="product-hero-meta" id="product-meta">50 ml · Eau de Parfum</p>
+          <p class="product-hero-price" id="product-hero-price">$340</p>
+        </div>
       </div>
     </section>
 
@@ -64,15 +77,23 @@
     <section class="product-purchase" aria-label="Purchase">
       <div class="product-purchase-inner">
         <p class="product-purchase-meta"><span id="product-price-main">$340</span> — 50 ml · Eau de Parfum</p>
-        <a href="cart.html?id=dunes-of-gold" class="product-cta-btn product-cta-btn--block" id="product-add-to-bag">Add to bag</a>
+        <button type="button" class="product-cta-btn product-cta-btn--block" id="product-add-to-bag">Add to Cart</button>
+      </div>
+    </section>
+
+    <section class="product-trust" aria-label="Trust">
+      <div class="product-trust-inner">
+        <p class="product-trust-item"><span class="product-trust-icon" aria-hidden="true">◆</span> Complimentary shipping on orders over $300</p>
+        <p class="product-trust-item"><span class="product-trust-icon" aria-hidden="true">◆</span> 30-day returns, no questions asked</p>
+        <p class="product-trust-item"><span class="product-trust-icon" aria-hidden="true">◆</span> Secure checkout · Your payment is protected</p>
       </div>
     </section>
   </main>
 
-  <!-- Sticky CTA: revealed on scroll, same tone -->
+  <!-- Sticky CTA: revealed on scroll -->
   <div class="product-cta-bar" id="product-cta-bar" aria-label="Purchase">
     <span class="product-cta-price"><span id="product-price">$340</span> — 50 ml</span>
-    <a href="cart.html?id=dunes-of-gold" class="product-cta-btn" id="product-cta-btn">Add to bag</a>
+    <button type="button" class="product-cta-btn" id="product-cta-btn">Add to Cart</button>
   </div>
 
   <script>
@@ -119,14 +140,34 @@
         if ((el = document.getElementById('product-notes'))) {
           el.innerHTML = p.notes.map(function(n) { return '<li>' + n + '</li>'; }).join('');
         }
-        var bagLink = document.getElementById('product-add-to-bag');
-        var barLink = document.getElementById('product-cta-btn');
-        var cartUrl = 'cart.html?id=' + id;
-        if (bagLink) bagLink.href = cartUrl;
-        if (barLink) barLink.href = cartUrl;
+        function addToCartAndGo() {
+          if (window.NabatiCart) window.NabatiCart.addItem(id, 1);
+          window.location.href = 'cart.html';
+        }
+        var bagBtn = document.getElementById('product-add-to-bag');
+        var barBtn = document.getElementById('product-cta-btn');
+        if (bagBtn) bagBtn.addEventListener('click', addToCartAndGo);
+        if (barBtn) barBtn.addEventListener('click', addToCartAndGo);
       }
     })();
   </script>
+  <script src="cart-store.js"></script>
   <script src="script.js"></script>
+  <script>
+    (function() {
+      var main = document.getElementById('product-gallery-main');
+      var thumbs = document.querySelectorAll('.product-gallery-thumb');
+      if (!main || !thumbs.length) return;
+      thumbs.forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          thumbs.forEach(function(b) { b.classList.remove('is-active'); });
+          btn.classList.add('is-active');
+          var v = btn.getAttribute('data-view');
+          main.classList.remove('product-gallery-main--main', 'product-gallery-main--detail', 'product-gallery-main--close');
+          main.classList.add('product-gallery-main--' + (v || 'main'));
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

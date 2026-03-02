@@ -22,9 +22,11 @@
   <section class="checkout-order-summary" aria-label="Order summary">
     <div class="checkout-order-inner">
       <h2 class="checkout-summary-heading">Order summary</h2>
-      <div class="checkout-summary-line" id="checkout-summary-line">
-        <span class="checkout-summary-name" id="checkout-summary-name">1 fragrance</span>
-        <span class="checkout-summary-meta" id="checkout-summary-meta">50 ml</span>
+      <div class="checkout-summary-lines" id="checkout-summary-lines">
+        <div class="checkout-summary-line" id="checkout-summary-line">
+          <span class="checkout-summary-name" id="checkout-summary-name">1 fragrance</span>
+          <span class="checkout-summary-meta" id="checkout-summary-meta">50 ml</span>
+        </div>
       </div>
       <p class="checkout-summary-total"><span class="checkout-summary-total-label">Total</span> <span class="checkout-summary-total-amount" id="checkout-summary-total">$340</span></p>
     </div>
@@ -79,26 +81,43 @@
       </fieldset>
 
       <button type="submit" class="checkout-submit">Complete order</button>
+
+      <div class="checkout-trust" aria-label="Security">
+        <p class="checkout-trust-line"><span class="checkout-trust-icon" aria-hidden="true">🔒</span> Secure checkout · SSL encrypted</p>
+        <p class="checkout-trust-line">Your payment information is protected. We never store card details.</p>
+      </div>
     </form>
   </div>
 
+  <script src="cart-store.js"></script>
   <script>
     (function() {
       var data = {
-        'dunes-of-gold': { name: 'Dunes of Gold', price: '$340' },
-        'sacred-smoke': { name: 'Sacred Smoke', price: '$360' },
-        'midnight-oasis': { name: 'Midnight Oasis', price: '$340' }
+        'dunes-of-gold': { name: 'Dunes of Gold', price: 340 },
+        'sacred-smoke': { name: 'Sacred Smoke', price: 360 },
+        'midnight-oasis': { name: 'Midnight Oasis', price: 340 }
       };
+      var linesEl = document.getElementById('checkout-summary-lines');
+      var totalEl = document.getElementById('checkout-summary-total');
+      var cart = window.NabatiCart ? window.NabatiCart.getCart() : [];
       var m = /id=([^&]+)/.exec(window.location.search || '');
-      var id = m && data[m[1]] ? m[1] : null;
-      if (id && data[id]) {
-        var p = data[id];
+      var fallbackId = m && data[m[1]] ? m[1] : 'dunes-of-gold';
+
+      if (cart.length && linesEl && totalEl) {
+        var total = 0;
+        linesEl.innerHTML = cart.map(function(line) {
+          var p = data[line.id];
+          if (!p) return '';
+          total += p.price * line.qty;
+          return '<div class="checkout-summary-line"><span class="checkout-summary-name">' + p.name + (line.qty > 1 ? ' × ' + line.qty : '') + '</span><span class="checkout-summary-meta">50 ml</span></div>';
+        }).join('');
+        totalEl.textContent = '$' + total;
+      } else {
         var nameEl = document.getElementById('checkout-summary-name');
         var metaEl = document.getElementById('checkout-summary-meta');
-        var totalEl = document.getElementById('checkout-summary-total');
-        if (nameEl) nameEl.textContent = p.name;
+        if (nameEl && data[fallbackId]) nameEl.textContent = data[fallbackId].name;
         if (metaEl) metaEl.textContent = '50 ml';
-        if (totalEl) totalEl.textContent = p.price;
+        if (totalEl && data[fallbackId]) totalEl.textContent = '$' + data[fallbackId].price;
       }
     })();
     document.getElementById('checkout-form').addEventListener('submit', function(e) {

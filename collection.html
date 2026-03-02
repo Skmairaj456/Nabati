@@ -21,61 +21,59 @@
       </span>
     </a>
     <nav class="masthead-nav" aria-label="Primary">
-      <a href="collection.html">Collection</a>
-      <a href="cart.html">Bag</a>
+      <a href="collection.html" class="masthead-nav-current">Shop All</a>
+      <a href="collection.html#featured">Best Sellers</a>
       <a href="index.html#contact">Contact</a>
+      <a href="cart.html" class="masthead-cart" aria-label="Cart">
+        <span class="masthead-cart-icon" aria-hidden="true"></span>
+        <span class="masthead-cart-count" id="masthead-cart-count">0</span>
+      </a>
     </nav>
   </header>
 
   <main>
     <section class="block collection-hero">
       <div class="block-inner block-inner--narrow">
-        <span class="section-label" data-reveal>The collection</span>
+        <span class="section-label" data-reveal>Shop All</span>
         <h1 class="collection-title" data-reveal>Three fragrances. One house.</h1>
-        <p class="collection-intro" data-reveal>Each scent is built from rare oils, precious woods, and resins sourced where the desert and tradition meet. Discover the one that speaks to you.</p>
+        <p class="collection-intro" data-reveal>Each scent is built from rare oils, precious woods, and resins sourced where the desert and tradition meet.</p>
       </div>
     </section>
 
-    <div class="collection-layout">
-      <article class="collection-item collection-item--large" data-reveal>
-        <div class="collection-item-visual">
-          <div class="collection-item-img collection-item-img--1"></div>
-        </div>
-        <div class="collection-item-copy">
-          <h2 class="collection-item-name"><a href="product.html?id=dunes-of-gold" class="collection-item-link">Dunes of Gold</a></h2>
-          <p class="collection-item-mood">Opulent. Warm. The desert at dusk.</p>
-          <p class="collection-item-notes">Oud · Saffron · Rose · Amber · Musk</p>
-          <p class="collection-item-meta">50 ml · Eau de Parfum — <span class="collection-item-price">$340</span></p>
-          <a href="product.html?id=dunes-of-gold" class="collection-item-cta">View fragrance</a>
-        </div>
-      </article>
-
-      <article class="collection-item" data-reveal>
-        <div class="collection-item-visual">
-          <div class="collection-item-img collection-item-img--2"></div>
-        </div>
-        <div class="collection-item-copy">
-          <h2 class="collection-item-name"><a href="product.html?id=sacred-smoke" class="collection-item-link">Sacred Smoke</a></h2>
-          <p class="collection-item-mood">Resinous. Meditative. Timeless.</p>
-          <p class="collection-item-notes">Frankincense · Myrrh · Cedar · Incense · Leather</p>
-          <p class="collection-item-meta">50 ml · Eau de Parfum — <span class="collection-item-price">$360</span></p>
-          <a href="product.html?id=sacred-smoke" class="collection-item-cta">View fragrance</a>
-        </div>
-      </article>
-
-      <article class="collection-item" data-reveal>
-        <div class="collection-item-visual">
-          <div class="collection-item-img collection-item-img--3"></div>
-        </div>
-        <div class="collection-item-copy">
-          <h2 class="collection-item-name"><a href="product.html?id=midnight-oasis" class="collection-item-link">Midnight Oasis</a></h2>
-          <p class="collection-item-mood">Floral depth. Desert night.</p>
-          <p class="collection-item-notes">Jasmine · Oud · Sandalwood · Saffron · Vanilla</p>
-          <p class="collection-item-meta">50 ml · Eau de Parfum — <span class="collection-item-price">$340</span></p>
-          <a href="product.html?id=midnight-oasis" class="collection-item-cta">View fragrance</a>
-        </div>
-      </article>
-    </div>
+    <section class="block collection-grid-block" id="featured">
+      <div class="collection-grid">
+        <article class="collection-card" data-reveal>
+          <a href="product.html?id=dunes-of-gold" class="collection-card-link">
+            <div class="collection-card-img collection-item-img--1"></div>
+            <h2 class="collection-card-name">Dunes of Gold</h2>
+            <p class="collection-card-meta">50 ml · Eau de Parfum</p>
+            <p class="collection-card-price">$340</p>
+            <span class="collection-card-cta">View Product</span>
+          </a>
+          <button type="button" class="collection-card-add" data-add="dunes-of-gold">Add to bag</button>
+        </article>
+        <article class="collection-card" data-reveal>
+          <a href="product.html?id=sacred-smoke" class="collection-card-link">
+            <div class="collection-card-img collection-item-img--2"></div>
+            <h2 class="collection-card-name">Sacred Smoke</h2>
+            <p class="collection-card-meta">50 ml · Eau de Parfum</p>
+            <p class="collection-card-price">$360</p>
+            <span class="collection-card-cta">View Product</span>
+          </a>
+          <button type="button" class="collection-card-add" data-add="sacred-smoke">Add to bag</button>
+        </article>
+        <article class="collection-card" data-reveal>
+          <a href="product.html?id=midnight-oasis" class="collection-card-link">
+            <div class="collection-card-img collection-item-img--3"></div>
+            <h2 class="collection-card-name">Midnight Oasis</h2>
+            <p class="collection-card-meta">50 ml · Eau de Parfum</p>
+            <p class="collection-card-price">$340</p>
+            <span class="collection-card-cta">View Product</span>
+          </a>
+          <button type="button" class="collection-card-add" data-add="midnight-oasis">Add to bag</button>
+        </article>
+      </div>
+    </section>
 
     <section class="block block-contact collection-contact" id="contact">
       <div class="block-inner block-inner--narrow">
@@ -97,6 +95,7 @@
     </div>
   </footer>
 
+  <script src="cart-store.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

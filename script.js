@@ -77,15 +77,7 @@
     window.addEventListener('resize', update);
     update();
 
-    if (btn && btn.tagName === 'A') {
-      // Link href is set by product page script (checkout.html?id=...)
-    } else if (btn) {
-      btn.addEventListener('click', function () {
-        var m = /id=([^&]+)/.exec(window.location.search || '');
-        var q = m ? '?id=' + m[1] : '';
-        window.location.href = 'cart.html' + q;
-      });
-    }
+    // Product page owns Add to Cart (addItem + redirect); no duplicate handler here.
   }
 
   // ----- Run
@@ -95,9 +87,39 @@
     run();
   }
 
+  // ----- Cart count in masthead
+  function initCartCount() {
+    var el = document.getElementById('masthead-cart-count');
+    if (!el || !window.NabatiCart) return;
+    function update() { el.textContent = window.NabatiCart.getCount(); }
+    update();
+    window.addEventListener('storage', update);
+  }
+
+  // ----- Add to bag (Featured + Collection grid)
+  function initAddToBag() {
+    if (!window.NabatiCart) return;
+    document.querySelectorAll('[data-add]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        var id = btn.getAttribute('data-add');
+        if (id) {
+          window.NabatiCart.addItem(id, 1);
+          var countEl = document.getElementById('masthead-cart-count');
+          if (countEl) countEl.textContent = window.NabatiCart.getCount();
+          btn.textContent = 'Added';
+          btn.disabled = true;
+          setTimeout(function() { btn.textContent = 'Add to bag'; btn.disabled = false; }, 1500);
+        }
+      });
+    });
+  }
+
   function run() {
     initOpening();
     initReveals();
     initProductCta();
+    initCartCount();
+    initAddToBag();
   }
 })();

@@ -21,9 +21,13 @@
       </span>
     </a>
     <nav class="masthead-nav" aria-label="Primary">
-      <a href="collection.html">Collection</a>
-      <a href="cart.html" class="masthead-nav-current">Bag</a>
+      <a href="collection.html">Shop All</a>
+      <a href="collection.html#featured">Best Sellers</a>
       <a href="index.html#contact">Contact</a>
+      <a href="cart.html" class="masthead-cart masthead-nav-current" aria-label="Cart">
+        <span class="masthead-cart-icon" aria-hidden="true"></span>
+        <span class="masthead-cart-count" id="masthead-cart-count">0</span>
+      </a>
     </nav>
   </header>
 
@@ -32,22 +36,12 @@
       <h1 class="cart-title">Your bag</h1>
 
       <div class="cart-content" id="cart-content">
-        <!-- Filled by JS when ?id= present -->
         <div class="cart-empty" id="cart-empty">
           <p class="cart-empty-text">Your bag is empty.</p>
-          <a href="collection.html" class="cart-empty-cta">View the collection</a>
+          <a href="collection.html" class="cart-empty-cta">Shop the collection</a>
         </div>
         <div class="cart-items" id="cart-items" hidden>
-          <div class="cart-item" id="cart-item">
-            <div class="cart-item-visual">
-              <div class="cart-item-img" id="cart-item-img"></div>
-            </div>
-            <div class="cart-item-details">
-              <h2 class="cart-item-name" id="cart-item-name"></h2>
-              <p class="cart-item-meta" id="cart-item-meta"></p>
-              <p class="cart-item-price" id="cart-item-price"></p>
-            </div>
-          </div>
+          <div class="cart-items-list" id="cart-items-list"></div>
           <div class="cart-summary">
             <p class="cart-total"><span class="cart-total-label">Total</span> <span class="cart-total-amount" id="cart-total"></span></p>
             <a href="#" class="cart-checkout-btn" id="cart-checkout-btn">Proceed to checkout</a>
@@ -69,30 +63,79 @@
     </div>
   </footer>
 
+  <script src="cart-store.js"></script>
   <script>
     (function() {
-      var data = {
-        'dunes-of-gold': { name: 'Dunes of Gold', price: '$340', imgClass: 'collection-item-img--1' },
-        'sacred-smoke': { name: 'Sacred Smoke', price: '$360', imgClass: 'collection-item-img--2' },
-        'midnight-oasis': { name: 'Midnight Oasis', price: '$340', imgClass: 'collection-item-img--3' }
+      var DATA = {
+        'dunes-of-gold': { name: 'Dunes of Gold', price: 340, imgClass: 'collection-item-img--1' },
+        'sacred-smoke': { name: 'Sacred Smoke', price: 360, imgClass: 'collection-item-img--2' },
+        'midnight-oasis': { name: 'Midnight Oasis', price: 340, imgClass: 'collection-item-img--3' }
       };
       var m = /id=([^&]+)/.exec(window.location.search || '');
-      var id = m && data[m[1]] ? m[1] : null;
-      var emptyEl = document.getElementById('cart-empty');
-      var itemsEl = document.getElementById('cart-items');
-      var checkoutBtn = document.getElementById('cart-checkout-btn');
+      if (m && DATA[m[1]] && window.NabatiCart) {
+        window.NabatiCart.addItem(m[1], 1);
+        window.history.replaceState({}, '', 'cart.html');
+      }
 
-      if (id && data[id]) {
-        var p = data[id];
+      function render() {
+        var cart = window.NabatiCart ? window.NabatiCart.getCart() : [];
+        var emptyEl = document.getElementById('cart-empty');
+        var itemsEl = document.getElementById('cart-items');
+        var listEl = document.getElementById('cart-items-list');
+        var totalEl = document.getElementById('cart-total');
+        var checkoutBtn = document.getElementById('cart-checkout-btn');
+        var countEl = document.getElementById('masthead-cart-count');
+
+        if (countEl) countEl.textContent = window.NabatiCart ? window.NabatiCart.getCount() : 0;
+
+        if (!cart.length) {
+          emptyEl.hidden = false;
+          itemsEl.hidden = true;
+          return;
+        }
         emptyEl.hidden = true;
         itemsEl.hidden = false;
-        document.getElementById('cart-item-name').textContent = p.name;
-        document.getElementById('cart-item-meta').textContent = '50 ml · Eau de Parfum';
-        document.getElementById('cart-item-price').textContent = p.price;
-        document.getElementById('cart-total').textContent = p.price;
-        document.getElementById('cart-item-img').className = 'cart-item-img ' + p.imgClass;
-        if (checkoutBtn) checkoutBtn.href = 'checkout.html?id=' + id;
+
+        var total = 0;
+        var firstId = null;
+        listEl.innerHTML = cart.map(function(line) {
+          var p = DATA[line.id];
+          if (!p) return '';
+          var lineTotal = p.price * line.qty;
+          total += lineTotal;
+          if (!firstId) firstId = line.id;
+          return '<div class="cart-item" data-id="' + line.id + '">' +
+            '<div class="cart-item-visual"><div class="cart-item-img ' + p.imgClass + '"></div></div>' +
+            '<div class="cart-item-details">' +
+              '<h2 class="cart-item-name">' + p.name + '</h2>' +
+              '<p class="cart-item-meta">50 ml · Eau de Parfum</p>' +
+              '<div class="cart-item-qty">' +
+                '<button type="button" class="cart-qty-btn" aria-label="Decrease" data-id="' + line.id + '" data-delta="-1">−</button>' +
+                '<span class="cart-qty-num">' + line.qty + '</span>' +
+                '<button type="button" class="cart-qty-btn" aria-label="Increase" data-id="' + line.id + '" data-delta="1">+</button>' +
+              '</div>' +
+              '<p class="cart-item-price">$' + lineTotal + '</p>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+
+        if (totalEl) totalEl.textContent = '$' + total;
+        if (checkoutBtn) checkoutBtn.href = 'checkout.html';
+
+        listEl.querySelectorAll('.cart-qty-btn').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            var id = btn.getAttribute('data-id');
+            var delta = parseInt(btn.getAttribute('data-delta'), 10);
+            var line = cart.find(function(x) { return x.id === id; });
+            if (!line) return;
+            window.NabatiCart.setItemQty(id, line.qty + delta);
+            render();
+          });
+        });
       }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', render);
+      else render();
     })();
   </script>
   <script src="script.js"></script>
