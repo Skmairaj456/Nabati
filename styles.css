@@ -912,6 +912,13 @@ a {
   opacity: 1;
 }
 
+/* ---- The house (compact brand block after shop) ---- */
+.block-house {
+  padding-top: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-top: var(--border-subtle);
+}
+
 /* ---- Bespoke (exclusive, consultative, premium) ---- */
 .block-bespoke {
   padding-top: var(--space-6);
@@ -1533,6 +1540,12 @@ a {
   color: var(--paper);
 }
 
+.product-cta-btn--hero {
+  margin-top: var(--space-4);
+  width: 100%;
+  max-width: 280px;
+}
+
 /* Product sticky CTA — revealed on scroll, same tone */
 .product-cta-bar {
   position: fixed;
@@ -1726,6 +1739,14 @@ a {
   margin: 0 auto;
   width: 100%;
   flex: 1;
+}
+
+.checkout-secure-label {
+  font-size: var(--type-label);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--gold-muted);
+  margin-bottom: var(--space-4);
 }
 
 .checkout-section {
@@ -2008,6 +2029,21 @@ a {
   letter-spacing: 0.12em;
   color: var(--paper-muted);
   margin-right: var(--space-2);
+}
+
+.cart-subtotal {
+  font-family: var(--font-editorial);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--paper);
+  margin-bottom: var(--space-4);
+}
+
+.cart-item-subtotal {
+  font-family: var(--font-editorial);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--paper);
 }
 
 .cart-checkout-btn {

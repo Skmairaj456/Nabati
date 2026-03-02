@@ -50,6 +50,7 @@
           <p class="product-hero-mood" id="product-mood">Opulent. Warm.</p>
           <p class="product-hero-meta" id="product-meta">50 ml · Eau de Parfum</p>
           <p class="product-hero-price" id="product-hero-price">$340</p>
+          <button type="button" class="product-cta-btn product-cta-btn--hero" id="product-add-to-bag-hero">Add to Cart</button>
         </div>
       </div>
     </section>
@@ -146,8 +147,10 @@
           window.location.href = 'cart.html';
         }
         var bagBtn = document.getElementById('product-add-to-bag');
+        var bagHero = document.getElementById('product-add-to-bag-hero');
         var barBtn = document.getElementById('product-cta-btn');
         if (bagBtn) bagBtn.addEventListener('click', addToCartAndGo);
+        if (bagHero) bagHero.addEventListener('click', addToCartAndGo);
         if (barBtn) barBtn.addEventListener('click', addToCartAndGo);
       }
     })();

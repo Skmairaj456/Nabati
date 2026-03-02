@@ -44,8 +44,8 @@
         <div class="cart-items" id="cart-items" hidden>
           <div class="cart-items-list" id="cart-items-list"></div>
           <div class="cart-summary">
-            <p class="cart-total"><span class="cart-total-label">Total</span> <span class="cart-total-amount" id="cart-total"></span></p>
-            <a href="#" class="cart-checkout-btn" id="cart-checkout-btn">Proceed to checkout</a>
+            <p class="cart-subtotal"><span class="cart-total-label">Subtotal</span> <span class="cart-total-amount" id="cart-total"></span></p>
+            <a href="#" class="cart-checkout-btn" id="cart-checkout-btn">Proceed to Checkout</a>
             <a href="collection.html" class="cart-continue">Continue shopping</a>
           </div>
         </div>
@@ -116,7 +116,7 @@
                 '<span class="cart-qty-num">' + line.qty + '</span>' +
                 '<button type="button" class="cart-qty-btn" aria-label="Increase" data-id="' + line.id + '" data-delta="1">+</button>' +
               '</div>' +
-              '<p class="cart-item-price">$' + lineTotal + '</p>' +
+              '<p class="cart-item-subtotal">$' + lineTotal + '</p>' +
             '</div>' +
           '</div>';
         }).join('');
