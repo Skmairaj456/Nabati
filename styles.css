@@ -1857,22 +1857,58 @@ a {
   margin-right: var(--space-1);
 }
 
-/* ---- Responsive: tablet and below ---- */
+/* ---- Responsive: tablet and below (fix nav cut-off + hero overlap for all small screens) ---- */
 @media (max-width: 900px) {
-  .masthead-inner {
-    flex-wrap: wrap;
-    gap: var(--space-2);
+  /* Solid header so hero title never shows through; no blend mode */
+  .masthead {
+    mix-blend-mode: normal;
+    background: #0f0e0c;
+    border-bottom: 1px solid rgba(154, 139, 110, 0.15);
   }
 
-  .masthead-nav {
-    gap: var(--space-3);
+  .masthead-inner {
+    flex-direction: column;
+    align-items: stretch;
     flex-wrap: wrap;
-    justify-content: flex-end;
+    gap: var(--space-3);
+    padding: var(--space-2) var(--content-gutter);
+    max-width: 100%;
+    overflow: hidden;
+  }
+
+  .masthead-logo {
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* Nav as 2-column grid so all links fit and none are cut off */
+  .masthead-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-1);
+    width: 100%;
+    max-width: 100%;
+    justify-items: center;
   }
 
   .masthead-nav a {
     font-size: 10px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.16em;
+    padding: var(--space-2) var(--space-1);
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    width: 100%;
+    max-width: 140px;
+    box-sizing: border-box;
+  }
+
+  .masthead-cart {
+    grid-column: 1 / -1;
+    max-width: 80px;
+    justify-self: center;
   }
 
   .masthead-logo-text {
@@ -1881,6 +1917,17 @@ a {
 
   .masthead-word-sub {
     font-size: 0.65rem;
+  }
+
+  /* Hero content starts below fixed header; smaller title so it doesn't overlap */
+  .open {
+    padding-top: calc(110px + env(safe-area-inset-top));
+    padding-left: var(--content-gutter);
+    padding-right: var(--content-gutter);
+  }
+
+  .open-title-main {
+    font-size: clamp(1.75rem, 7vw, 2.5rem);
   }
 
   .block-inner--asymmetric,
@@ -1917,10 +1964,6 @@ a {
     gap: var(--space-3);
   }
 
-  .open {
-    padding: var(--space-4);
-  }
-
   .block {
     padding: var(--space-5) 0;
   }
@@ -1937,56 +1980,14 @@ a {
   }
 }
 
-/* ---- 768px: solid header + stacked nav so links don't get cut off, hero title doesn't overlap ---- */
+/* ---- 768px: keep grid nav, more padding ---- */
 @media (max-width: 768px) {
-  .masthead {
-    mix-blend-mode: normal;
-    background: rgba(15, 14, 12, 0.98);
-    border-bottom: 1px solid rgba(154, 139, 110, 0.12);
-  }
-
-  .masthead-inner {
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: stretch;
-    padding: var(--space-2) var(--content-gutter);
-    gap: var(--space-2);
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .masthead-logo {
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .masthead-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-2);
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .masthead-nav a {
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    padding: var(--space-2) var(--space-1);
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-    flex: 0 1 auto;
-  }
-
   .open {
     padding-top: calc(100px + var(--space-4) + env(safe-area-inset-top));
   }
 
   .open-title-main {
-    font-size: clamp(1.85rem, 8vw, 2.5rem);
+    font-size: clamp(1.7rem, 7.5vw, 2.35rem);
   }
 }
 
@@ -2027,33 +2028,10 @@ a {
     font-size: 0.65rem;
   }
 
-  .masthead-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--space-2);
-    row-gap: var(--space-1);
-    max-width: 100%;
-    overflow: hidden;
-  }
-
   .masthead-nav a {
     font-size: 11px;
-    flex: 0 1 auto;
-    letter-spacing: 0.18em;
-    padding: var(--space-2) var(--space-1);
-    min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 1;
-  }
-
-  .masthead-cart {
-    min-width: 44px;
-    min-height: 44px;
-    justify-content: center;
+    letter-spacing: 0.16em;
+    max-width: 130px;
   }
 
   /* Main content: clear fixed header */
