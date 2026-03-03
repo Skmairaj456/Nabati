@@ -267,6 +267,11 @@ a {
   display: block;
 }
 
+/* Hamburger: hidden on desktop */
+.masthead-menu-btn {
+  display: none;
+}
+
 /* ---- Blocks (editorial rhythm) ---- */
 .block {
   padding: var(--space-6) 0;
@@ -1857,9 +1862,9 @@ a {
   margin-right: var(--space-1);
 }
 
-/* ---- Responsive: tablet and below (fix nav cut-off + hero overlap for all small screens) ---- */
+/* ---- Responsive: tablet and below — hamburger menu, no nav overflow ---- */
 @media (max-width: 900px) {
-  /* Solid header so hero title never shows through; no blend mode */
+  /* Solid header so hero title never shows through */
   .masthead {
     mix-blend-mode: normal;
     background: #0f0e0c;
@@ -1867,48 +1872,106 @@ a {
   }
 
   .masthead-inner {
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
     flex-wrap: wrap;
-    gap: var(--space-3);
+    align-items: center;
+    justify-content: space-between;
+    gap: 0;
     padding: var(--space-2) var(--content-gutter);
     max-width: 100%;
-    overflow: hidden;
   }
 
   .masthead-logo {
-    justify-content: center;
     flex-shrink: 0;
   }
 
-  /* Nav as 2-column grid so all links fit and none are cut off */
-  .masthead-nav {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-1);
-    width: 100%;
-    max-width: 100%;
-    justify-items: center;
+  /* Hamburger button: visible on small screens */
+  .masthead-menu-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--paper);
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .masthead-nav a {
-    font-size: 10px;
-    letter-spacing: 0.16em;
-    padding: var(--space-2) var(--space-1);
-    min-height: 44px;
+  .masthead-menu-btn::before,
+  .masthead-menu-btn::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: currentColor;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .masthead-menu-btn::before {
+    margin-bottom: 5px;
+  }
+
+  .masthead-menu-btn .masthead-menu-btn-line {
+    display: block;
+    width: 20px;
+    height: 1px;
+    margin-bottom: 5px;
+    background: currentColor;
+    transition: opacity 0.3s ease;
+  }
+
+  .masthead-menu-open .masthead-menu-btn .masthead-menu-btn-line {
+    opacity: 0;
+  }
+
+  .masthead-menu-open .masthead-menu-btn::before {
+    transform: translateY(6px) rotate(45deg);
+  }
+
+  .masthead-menu-open .masthead-menu-btn::after {
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* Nav: hidden by default, full-width dropdown when open */
+  .masthead-nav {
+    display: none;
+    width: 100%;
+    flex-basis: 100%;
+    order: 99;
+    padding: var(--space-4) 0 var(--space-3);
+    border-top: 1px solid rgba(154, 139, 110, 0.2);
+    margin-top: var(--space-2);
+  }
+
+  .masthead-menu-open .masthead-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    align-items: stretch;
+  }
+
+  .masthead-menu-open .masthead-nav a {
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 1;
+    padding: var(--space-3);
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    min-height: 48px;
     width: 100%;
-    max-width: 140px;
+    max-width: none;
+    border: none;
     box-sizing: border-box;
   }
 
-  .masthead-cart {
-    grid-column: 1 / -1;
-    max-width: 80px;
-    justify-self: center;
+  .masthead-menu-open .masthead-cart {
+    grid-column: unset;
+    max-width: none;
   }
 
   .masthead-logo-text {
@@ -1919,7 +1982,7 @@ a {
     font-size: 0.65rem;
   }
 
-  /* Hero content starts below fixed header; smaller title so it doesn't overlap */
+  /* Hero starts below header */
   .open {
     padding-top: calc(110px + env(safe-area-inset-top));
     padding-left: var(--content-gutter);

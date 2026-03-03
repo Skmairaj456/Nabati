@@ -96,6 +96,46 @@
     window.addEventListener('storage', update);
   }
 
+  // ----- Mobile menu (hamburger)
+  function initMobileMenu() {
+    var btn = document.getElementById('masthead-menu-btn');
+    var masthead = document.querySelector('.masthead');
+    var nav = document.getElementById('masthead-nav');
+    if (!btn || !masthead || !nav) return;
+
+    function open() {
+      masthead.classList.add('masthead-menu-open');
+      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-label', 'Close menu');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function close() {
+      masthead.classList.remove('masthead-menu-open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Open menu');
+      document.body.style.overflow = '';
+    }
+
+    function toggle() {
+      if (masthead.classList.contains('masthead-menu-open')) {
+        close();
+      } else {
+        open();
+      }
+    }
+
+    btn.addEventListener('click', toggle);
+    nav.querySelectorAll('a').forEach(function(link) {
+      link.addEventListener('click', close);
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && masthead.classList.contains('masthead-menu-open')) {
+        close();
+      }
+    });
+  }
+
   // ----- Add to bag (Featured + Collection grid)
   function initAddToBag() {
     if (!window.NabatiCart) return;
@@ -121,5 +161,6 @@
     initProductCta();
     initCartCount();
     initAddToBag();
+    initMobileMenu();
   }
 })();
