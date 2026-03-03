@@ -142,6 +142,7 @@ a {
   right: 0;
   z-index: 100;
   padding: var(--space-2) 0;
+  min-height: 56px;
   mix-blend-mode: difference;
   pointer-events: none;
 }
@@ -196,7 +197,9 @@ a {
 
 .masthead-nav {
   display: flex;
+  align-items: center;
   gap: var(--space-4);
+  flex-shrink: 0;
 }
 
 .masthead-nav a {
@@ -206,6 +209,7 @@ a {
   color: var(--paper);
   opacity: 0.75;
   transition: opacity var(--duration-fast) var(--ease);
+  white-space: nowrap;
 }
 
 .masthead-nav a:hover {
@@ -1877,7 +1881,7 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: 0;
-    padding: var(--space-2) var(--content-gutter);
+    padding: var(--space-2) max(var(--content-gutter), env(safe-area-inset-left)) var(--space-2) max(var(--content-gutter), env(safe-area-inset-right));
     max-width: 100%;
   }
 
@@ -1944,8 +1948,11 @@ a {
     flex-basis: 100%;
     order: 99;
     padding: var(--space-4) 0 var(--space-3);
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
     border-top: 1px solid rgba(154, 139, 110, 0.2);
     margin-top: var(--space-2);
+    box-sizing: border-box;
   }
 
   .masthead-menu-open .masthead-nav {
@@ -1958,8 +1965,8 @@ a {
   .masthead-menu-open .masthead-nav a {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: var(--space-3);
+    justify-content: flex-start;
+    padding: var(--space-3) 0;
     font-size: 12px;
     letter-spacing: 0.2em;
     min-height: 48px;
@@ -2070,31 +2077,22 @@ a {
   }
 
   .masthead-inner {
-    flex-direction: column;
-    align-items: stretch;
-    padding: var(--space-2) var(--content-gutter);
-    gap: var(--space-3);
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
     max-width: 100%;
-    overflow: hidden;
-  }
-
-  .masthead-logo {
-    justify-content: center;
-    padding: var(--space-1) 0;
   }
 
   .masthead-logo-text {
-    font-size: 1rem;
+    font-size: 0.85rem;
   }
 
   .masthead-word-sub {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
   }
 
-  .masthead-nav a {
+  .masthead-menu-open .masthead-nav a {
     font-size: 11px;
     letter-spacing: 0.16em;
-    max-width: 130px;
   }
 
   /* Main content: clear fixed header */
