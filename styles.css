@@ -2042,8 +2042,19 @@ a {
   /* Hero starts below slim header */
   .open {
     padding-top: calc(56px + env(safe-area-inset-top));
-    padding-left: var(--content-gutter);
-    padding-right: var(--content-gutter);
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
+  }
+
+  .block-inner,
+  .block-inner--narrow {
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
+  }
+
+  .product-card-grid {
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
   }
 
   .open-title-main {
@@ -2166,13 +2177,14 @@ a {
     padding-top: 0;
   }
 
-  /* ---- Mobile hero: calm, centered, clear, luxurious ---- */
+  /* ---- Mobile hero: same horizontal alignment as rest of page ---- */
   .open {
-    padding: var(--space-6) var(--content-gutter) var(--space-7);
-    min-height: 100vh;
-    min-height: 100dvh;
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
     padding-top: calc(50px + var(--space-6) + env(safe-area-inset-top));
     padding-bottom: var(--space-7);
+    min-height: 100vh;
+    min-height: 100dvh;
     align-items: center;
     justify-content: center;
   }
@@ -2285,11 +2297,28 @@ a {
     padding: var(--space-2) 0;
   }
 
-  /* Product cards: 2 columns on mobile for product-driven layout */
+  /* Product cards: 2 columns; same horizontal alignment as header/content */
   .product-card-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: var(--space-4);
-    padding: 0 var(--content-gutter);
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
+  }
+
+  .block-inner,
+  .block-inner--narrow {
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
+  }
+
+  .foot-inner {
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
+  }
+
+  .cart-main {
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
   }
 
   .product-card__img {
@@ -2363,7 +2392,8 @@ a {
   .product-hero-inner {
     flex-direction: column;
     gap: var(--space-6);
-    padding: 0 var(--content-gutter);
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
   }
 
   .product-gallery {
@@ -2415,8 +2445,8 @@ a {
   .product-notes-inner,
   .product-purchase-inner,
   .product-trust-inner {
-    padding-left: var(--content-gutter);
-    padding-right: var(--content-gutter);
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
   }
 
   .checkout-form .row {
@@ -2452,7 +2482,8 @@ a {
   }
 
   .foot-inner {
-    padding: 0 var(--content-gutter);
+    padding-left: max(var(--content-gutter), env(safe-area-inset-left));
+    padding-right: max(var(--content-gutter), env(safe-area-inset-right));
     gap: var(--space-4);
   }
 
