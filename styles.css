@@ -134,7 +134,7 @@ a {
   text-decoration: none;
 }
 
-/* ---- Masthead ---- */
+/* ---- Masthead (transparent: hero shows through, gradient keeps nav readable) ---- */
 .masthead {
   position: fixed;
   top: 0;
@@ -143,7 +143,7 @@ a {
   z-index: 100;
   padding: var(--space-2) 0;
   min-height: 56px;
-  mix-blend-mode: difference;
+  background: linear-gradient(to bottom, rgba(15, 14, 12, 0.6) 0%, rgba(15, 14, 12, 0) 100%);
   pointer-events: none;
 }
 
@@ -1868,11 +1868,10 @@ a {
 
 /* ---- Responsive: tablet and below — hamburger menu, no nav overflow ---- */
 @media (max-width: 900px) {
-  /* Solid header so hero title never shows through */
+  /* Semi-transparent header so hero shows through; strong enough for readability */
   .masthead {
-    mix-blend-mode: normal;
-    background: #0f0e0c;
-    border-bottom: 1px solid rgba(154, 139, 110, 0.15);
+    background: rgba(15, 14, 12, 0.88);
+    border-bottom: 1px solid rgba(154, 139, 110, 0.12);
   }
 
   .masthead-inner {
