@@ -14,22 +14,24 @@
   <div class="texture" aria-hidden="true"></div>
 
   <header class="masthead">
-    <a href="index.html" class="masthead-logo" aria-label="NABATI ORIGINALS">
-      <span class="masthead-logo-text on">
-        <span class="masthead-word">NABATI</span>
-        <span class="masthead-word masthead-word-sub">ORIGINALS</span>
-      </span>
-    </a>
-    <nav class="masthead-nav" aria-label="Primary">
-      <a href="collection.html" class="masthead-nav-current">Shop All</a>
-      <a href="collection.html#featured">Best Sellers</a>
-      <a href="bespoke.html">Bespoke</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="cart.html" class="masthead-cart" aria-label="Cart">
-        <span class="masthead-cart-icon" aria-hidden="true"></span>
-        <span class="masthead-cart-count" id="masthead-cart-count">0</span>
+    <div class="masthead-inner">
+      <a href="index.html" class="masthead-logo" aria-label="NABATI ORIGINALS">
+        <span class="masthead-logo-text on">
+          <span class="masthead-word">NABATI</span>
+          <span class="masthead-word masthead-word-sub">ORIGINALS</span>
+        </span>
       </a>
-    </nav>
+      <nav class="masthead-nav" aria-label="Primary">
+        <a href="collection.html" class="masthead-nav-current">Shop All</a>
+        <a href="collection.html#featured">Best Sellers</a>
+        <a href="bespoke.html">Bespoke</a>
+        <a href="index.html#contact">Contact</a>
+        <a href="cart.html" class="masthead-cart" aria-label="Cart">
+          <span class="masthead-cart-icon" aria-hidden="true"></span>
+          <span class="masthead-cart-count" id="masthead-cart-count">0</span>
+        </a>
+      </nav>
+    </div>
   </header>
 
   <main>
@@ -42,36 +44,42 @@
     </section>
 
     <section class="block collection-grid-block" id="featured">
-      <div class="collection-grid">
-        <article class="collection-card" data-reveal>
-          <a href="product.html?id=dunes-of-gold" class="collection-card-link">
-            <div class="collection-card-img collection-item-img--1"></div>
-            <h2 class="collection-card-name">Dunes of Gold</h2>
-            <p class="collection-card-meta">50 ml · Eau de Parfum</p>
-            <p class="collection-card-price">$340</p>
-            <span class="collection-card-cta">View Product</span>
+      <div class="product-card-grid">
+        <article class="product-card" data-reveal>
+          <a href="product.html?id=dunes-of-gold" class="product-card__link">
+            <div class="product-card__img product-card__img--1" aria-hidden="true"></div>
+            <div class="product-card__body">
+              <h2 class="product-card__name">Dunes of Gold</h2>
+              <p class="product-card__meta">Eau de Parfum · 50 ml</p>
+              <p class="product-card__price">$340</p>
+              <span class="product-card__cta">View details</span>
+            </div>
           </a>
-          <button type="button" class="collection-card-add" data-add="dunes-of-gold">Add to bag</button>
+          <button type="button" class="product-card__add" data-add="dunes-of-gold" aria-label="Add Dunes of Gold to bag">Add to bag</button>
         </article>
-        <article class="collection-card" data-reveal>
-          <a href="product.html?id=sacred-smoke" class="collection-card-link">
-            <div class="collection-card-img collection-item-img--2"></div>
-            <h2 class="collection-card-name">Sacred Smoke</h2>
-            <p class="collection-card-meta">50 ml · Eau de Parfum</p>
-            <p class="collection-card-price">$360</p>
-            <span class="collection-card-cta">View Product</span>
+        <article class="product-card" data-reveal>
+          <a href="product.html?id=sacred-smoke" class="product-card__link">
+            <div class="product-card__img product-card__img--2" aria-hidden="true"></div>
+            <div class="product-card__body">
+              <h2 class="product-card__name">Sacred Smoke</h2>
+              <p class="product-card__meta">Eau de Parfum · 50 ml</p>
+              <p class="product-card__price">$360</p>
+              <span class="product-card__cta">View details</span>
+            </div>
           </a>
-          <button type="button" class="collection-card-add" data-add="sacred-smoke">Add to bag</button>
+          <button type="button" class="product-card__add" data-add="sacred-smoke" aria-label="Add Sacred Smoke to bag">Add to bag</button>
         </article>
-        <article class="collection-card" data-reveal>
-          <a href="product.html?id=midnight-oasis" class="collection-card-link">
-            <div class="collection-card-img collection-item-img--3"></div>
-            <h2 class="collection-card-name">Midnight Oasis</h2>
-            <p class="collection-card-meta">50 ml · Eau de Parfum</p>
-            <p class="collection-card-price">$340</p>
-            <span class="collection-card-cta">View Product</span>
+        <article class="product-card" data-reveal>
+          <a href="product.html?id=midnight-oasis" class="product-card__link">
+            <div class="product-card__img product-card__img--3" aria-hidden="true"></div>
+            <div class="product-card__body">
+              <h2 class="product-card__name">Midnight Oasis</h2>
+              <p class="product-card__meta">Eau de Parfum · 50 ml</p>
+              <p class="product-card__price">$340</p>
+              <span class="product-card__cta">View details</span>
+            </div>
           </a>
-          <button type="button" class="collection-card-add" data-add="midnight-oasis">Add to bag</button>
+          <button type="button" class="product-card__add" data-add="midnight-oasis" aria-label="Add Midnight Oasis to bag">Add to bag</button>
         </article>
       </div>
     </section>
