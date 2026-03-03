@@ -96,6 +96,28 @@
     window.addEventListener('storage', update);
   }
 
+  // ----- Mobile header: subtle background only after scroll
+  function initMastheadScroll() {
+    var masthead = document.querySelector('.masthead');
+    if (!masthead) return;
+    var threshold = 40;
+    var mq = window.matchMedia('(max-width: 900px)');
+    function update() {
+      if (!mq.matches) {
+        masthead.classList.remove('masthead-scrolled');
+        return;
+      }
+      if (window.scrollY > threshold) {
+        masthead.classList.add('masthead-scrolled');
+      } else {
+        masthead.classList.remove('masthead-scrolled');
+      }
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    mq.addEventListener('change', update);
+    update();
+  }
+
   // ----- Mobile menu (hamburger)
   function initMobileMenu() {
     var btn = document.getElementById('masthead-menu-btn');
@@ -162,5 +184,6 @@
     initCartCount();
     initAddToBag();
     initMobileMenu();
+    initMastheadScroll();
   }
 })();

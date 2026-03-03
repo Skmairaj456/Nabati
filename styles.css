@@ -1867,13 +1867,23 @@ a {
   margin-right: var(--space-1);
 }
 
-/* ---- Responsive: tablet and below — hamburger menu, no nav overflow ---- */
+/* ---- Responsive: tablet and below — hamburger menu, slim lightweight header ---- */
 @media (max-width: 900px) {
-  /* Solid header so hero title never shows through */
+  /* Lightweight: transparent by default; subtle background only on scroll (see .masthead-scrolled) */
   .masthead {
     mix-blend-mode: normal;
-    background: #0f0e0c;
-    border-bottom: 1px solid rgba(154, 139, 110, 0.15);
+    min-height: 0;
+    padding: 10px 0;
+    background: rgba(15, 14, 12, 0.18);
+    border-bottom: 1px solid rgba(154, 139, 110, 0.08);
+    transition: background 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+  }
+
+  .masthead.masthead-scrolled {
+    background: rgba(15, 14, 12, 0.82);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom-color: rgba(154, 139, 110, 0.12);
   }
 
   .masthead-inner {
@@ -1882,12 +1892,15 @@ a {
     align-items: center;
     justify-content: space-between;
     gap: 0;
-    padding: var(--space-2) max(var(--content-gutter), env(safe-area-inset-left)) var(--space-2) max(var(--content-gutter), env(safe-area-inset-right));
+    min-height: 32px;
+    padding: 0 max(var(--content-gutter), env(safe-area-inset-left)) 0 max(var(--content-gutter), env(safe-area-inset-right));
     max-width: 100%;
   }
 
   .masthead-logo {
     flex-shrink: 0;
+    margin: 0;
+    padding: 0;
   }
 
   /* Hamburger button: visible on small screens */
@@ -1983,16 +1996,20 @@ a {
   }
 
   .masthead-logo-text {
-    font-size: 0.9rem;
+    font-size: 0.82rem;
+    letter-spacing: 0.16em;
+    line-height: 1.2;
   }
 
   .masthead-word-sub {
-    font-size: 0.65rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.24em;
+    margin-top: 0.5px;
   }
 
-  /* Hero starts below header */
+  /* Hero starts below slim header */
   .open {
-    padding-top: calc(110px + env(safe-area-inset-top));
+    padding-top: calc(56px + env(safe-area-inset-top));
     padding-left: var(--content-gutter);
     padding-right: var(--content-gutter);
   }
@@ -2071,24 +2088,34 @@ a {
 
   /* Header: readable and tappable; no blend so it’s always visible */
   .masthead {
-    padding: var(--space-2) 0;
+    min-height: 0;
+    padding: 8px 0;
     mix-blend-mode: normal;
-    background: rgba(15, 14, 12, 0.98);
-    border-bottom: 1px solid rgba(154, 139, 110, 0.12);
+    background: rgba(15, 14, 12, 0.2);
+    border-bottom: 1px solid rgba(154, 139, 110, 0.06);
   }
 
   .masthead-inner {
+    min-height: 0;
     padding-left: max(var(--content-gutter), env(safe-area-inset-left));
     padding-right: max(var(--content-gutter), env(safe-area-inset-right));
     max-width: 100%;
   }
 
+  .masthead-logo {
+    padding: 0;
+    margin: 0;
+  }
+
   .masthead-logo-text {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
+    letter-spacing: 0.14em;
   }
 
   .masthead-word-sub {
-    font-size: 0.6rem;
+    font-size: 0.56rem;
+    letter-spacing: 0.22em;
+    margin-top: 0.5px;
   }
 
   .masthead-menu-open .masthead-nav a {
@@ -2112,7 +2139,7 @@ a {
     padding: var(--space-6) var(--content-gutter) var(--space-7);
     min-height: 100vh;
     min-height: 100dvh;
-    padding-top: calc(56px + var(--space-6) + env(safe-area-inset-top));
+    padding-top: calc(50px + var(--space-6) + env(safe-area-inset-top));
     padding-bottom: var(--space-7);
     align-items: center;
     justify-content: center;
