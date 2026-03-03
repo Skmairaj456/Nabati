@@ -754,14 +754,14 @@ a {
   color: var(--gold-muted);
 }
 
-/* ---- Featured (homepage): uses product-card-grid ---- */
+/* ---- Featured (homepage): product-first, immediately after hero ---- */
 .block-featured {
-  padding-top: var(--space-7);
+  padding-top: var(--space-8);
   padding-bottom: var(--space-8);
 }
 
 .block-featured .block-inner {
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-5);
 }
 
 .block-featured .section-title {
@@ -770,10 +770,11 @@ a {
 
 .block-featured .section-intro {
   margin-bottom: 0;
+  max-width: 36em;
 }
 
 .block-featured .product-card-grid {
-  margin-top: var(--space-2);
+  margin-top: var(--space-4);
 }
 
 /* ---- Collection preview (homepage) ---- */
@@ -993,18 +994,34 @@ a {
   opacity: 1;
 }
 
-/* ---- The house (compact brand block after shop) ---- */
+/* ---- The house (brand story after products) ---- */
 .block-house {
+  padding-top: var(--space-7);
+  padding-bottom: var(--space-6);
+  border-top: var(--border-subtle);
+}
+
+.block-house .block-quote-body {
+  margin-bottom: var(--space-4);
+}
+
+/* ---- Bespoke (exclusive, secondary to main products) ---- */
+.block-bespoke {
   padding-top: var(--space-6);
   padding-bottom: var(--space-6);
   border-top: var(--border-subtle);
 }
 
-/* ---- Bespoke (exclusive, consultative, premium) ---- */
-.block-bespoke {
-  padding-top: var(--space-6);
-  padding-bottom: var(--space-6);
-  border-top: var(--border-subtle);
+.block-bespoke--home .section-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+}
+
+.block-bespoke--home .block-quote-body {
+  margin-bottom: var(--space-4);
+}
+
+.editorial-link--bespoke {
+  margin-top: var(--space-2);
 }
 
 .block-bespoke-hero {
@@ -2253,10 +2270,10 @@ a {
     padding: var(--space-2) 0;
   }
 
-  /* Product cards: single column, clear spacing */
+  /* Product cards: 2 columns on mobile for product-driven layout */
   .product-card-grid {
-    grid-template-columns: 1fr;
-    gap: var(--space-6);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
     padding: 0 var(--content-gutter);
   }
 
